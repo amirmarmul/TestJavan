@@ -1,11 +1,30 @@
 version: '3'
 services: 
-  mongo: 
-    image: mongo
+  # mongo: 
+  #   image: mongo
+  #   restart: always 
+  #   ports: 
+  #     - '27017:27017'
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: root
+  #     MONGO_INITDB_DATABASE: mydb
+
+  mysql:
+    image: mysql/mysql-server:8.0
     restart: always 
     ports: 
-      - '27017:27017'
+      - '3306:3306'
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-      MONGO_INITDB_DATABASE: mydb
+      MYSQL_ROOT_PASSWORD: myuser
+      MYSQL_ROOT_HOST: ''
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: myuser
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - 'mysql_data:/var/lib/mysql'
+
+volumes:
+  mysql_data:
+    driver: local
