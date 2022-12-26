@@ -1,7 +1,9 @@
+import server from './infra/webserver/server';
 
-export const start = () => {
+export const start = async () => {
     try {
-        console.log('Start...');
+        await server();
+        
     } catch (error) {
         console.error(error);
     }
