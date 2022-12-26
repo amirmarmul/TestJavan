@@ -18,17 +18,17 @@ export default class extends UserRepository {
 
         return seqUsers.map((seqUser: any) => {
             return new User(
-                seqUser.id,
+                seqUser.uid,
                 seqUser.name,
             );
         })
     }
 
     async findOne(id: string) {
-        const seqUser = await this.model.findByPk(id);
+        const seqUser = await this.model.findOne({ where: { uid: id } });
 
         return new User(
-            seqUser.id, 
+            seqUser.uid, 
             seqUser.name,
         );
     }
@@ -36,18 +36,18 @@ export default class extends UserRepository {
     async save(entity: User) {
         const { id, name } = entity;
 
-        const seqUser = await this.model.create({ id, name });
+        const seqUser = await this.model.create({ uid: id, name });
         
         await seqUser.save();
 
         return new User(
-            seqUser.id, 
+            seqUser.uid, 
             seqUser.name,
         )
     }
 
     async update(entity: User) {
-        const seqUser = await this.model.findByPk(entity.id);
+        const seqUser = await this.model.findOne({ where: { uid: entity.id } });
 
         if (!seqUser) return false;
 
@@ -56,13 +56,13 @@ export default class extends UserRepository {
         await seqUser.update({ name });
 
         return new User(
-            seqUser.id,
+            seqUser.uid,
             seqUser.name,
         )
     }
 
     async remove(id: string) {
-        const seqUser = await this.model.findByPk(id);
+        const seqUser = await this.model.findOne({ where: { uid: id } });
 
         if (seqUser) {
             return seqUser.destroy();
