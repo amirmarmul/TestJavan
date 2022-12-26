@@ -1,15 +1,5 @@
 version: '3'
-services: 
-  # mongo: 
-  #   image: mongo
-  #   restart: always 
-  #   ports: 
-  #     - '27017:27017'
-  #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: root
-  #     MONGO_INITDB_ROOT_PASSWORD: root
-  #     MONGO_INITDB_DATABASE: mydb
-
+services:
   mysql:
     image: mysql/mysql-server:8.0
     restart: always 
