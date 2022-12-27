@@ -1,5 +1,16 @@
 version: '3'
 services:
+  api: 
+    image: node:16-alpine 
+    working_dir: '/home/node/app'
+    command: ['npm', 'run', 'start:dev']
+    ports: 
+      - '4000:4000'
+    volumes:
+      - './api:/home/node/app'
+    depends_on:
+      - mysql
+
   mysql:
     image: mysql/mysql-server:8.0
     restart: always 
