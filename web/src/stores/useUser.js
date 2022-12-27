@@ -2,7 +2,7 @@ import _ from 'axios'
 import { defineStore } from 'pinia'
 
 const axios = _.create({
-    baseURL: 'https://amirmarmul-shiny-guide-69prr94x564c4px7-4000.preview.app.github.dev'
+    baseURL: 'http://localhost:4000'
 })
 
 export const useUser = defineStore({
