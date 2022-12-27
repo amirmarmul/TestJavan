@@ -9,7 +9,7 @@ export default {
 
         const users = await ListDevices(services);
 
-        return res.send(users);
+        return res.json(users);
     },
 
     async get(req: any, res: any) {
@@ -20,6 +20,6 @@ export default {
 
         const user = await GetDevice(deviceId, services);
 
-        return res.send(user);
+        return res.json(user);
     },
 }

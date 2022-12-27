@@ -12,7 +12,7 @@ export default {
 
         const users = await ListUsers(services);
 
-        return res.send(users);
+        return res.json(users);
     },
 
     async create(req: any, res: any) {
@@ -23,7 +23,7 @@ export default {
 
         const user = await CreateUser(name, gender, services);
 
-        return res.send(user);
+        return res.json(user);
     },
 
     async get(req: any, res: any) {
@@ -34,7 +34,7 @@ export default {
 
         const user = await GetUser(userId, services);
 
-        return res.send(user);
+        return res.json(user);
     },
 
     async update(req: any, res: any) {
@@ -47,7 +47,7 @@ export default {
 
         const user = await UpdateUser(userId, name, gender, services);
 
-        return res.send(user);
+        return res.json(user);
     },
 
     async delete(req: any, res: any) {
@@ -58,6 +58,6 @@ export default {
 
         await DeleteUser(userId, services);
 
-        return res.status(204).send();
+        return res.status(204).json();
     },
 }

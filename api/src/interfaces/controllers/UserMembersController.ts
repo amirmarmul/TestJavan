@@ -14,7 +14,7 @@ export default {
 
         const userDevice = await AttachUserMember(userId, memberId, services);
 
-        return res.send(userDevice);
+        return res.json(userDevice);
     },
 
     async get(req: any, res: any) {
@@ -25,7 +25,7 @@ export default {
 
         const userDevices = await GetUserMembers(userId, services);
 
-        return res.send(userDevices);
+        return res.json(userDevices);
     },
 
     async delete(req: any, res: any) {
@@ -36,6 +36,6 @@ export default {
 
         await RevokeUserMember(userId, memberId, services);
 
-        return res.status(204).send();
+        return res.status(204).json();
     },
 }
