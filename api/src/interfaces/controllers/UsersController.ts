@@ -17,11 +17,11 @@ export default {
 
     async create(req: any, res: any) {
 
-        const { name } = req.body;
+        const { name, gender } = req.body;
 
         const services = req.services; 
 
-        const user = await CreateUser(name, services);
+        const user = await CreateUser(name, gender, services);
 
         return res.send(user);
     },
@@ -41,11 +41,11 @@ export default {
 
         const userId = req.params.userId;
 
-        const { name } = req.body;
+        const { name, gender } = req.body;
 
         const services = req.services; 
 
-        const user = await UpdateUser(userId, name, services);
+        const user = await UpdateUser(userId, name, gender, services);
 
         return res.send(user);
     },

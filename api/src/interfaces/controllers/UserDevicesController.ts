@@ -1,4 +1,4 @@
-import AttactUserDevice from "../../app/usecases/AttachUserDevice";
+import AttachUserDevice from "../../app/usecases/AttachUserDevice";
 import GetUserDevices from "../../app/usecases/GetUserDevices";
 import RevokeUserDevice from "../../app/usecases/RevokeUserDevice";
 
@@ -12,7 +12,7 @@ export default {
 
         const services = req.services; 
 
-        const userDevice = await AttactUserDevice(userId, deviceId, services);
+        const userDevice = await AttachUserDevice(userId, deviceId, services);
 
         return res.send(userDevice);
     },
@@ -31,8 +31,6 @@ export default {
     async delete(req: any, res: any) {
 
         const { userId, deviceId } = req.params;
-
-        console.log(req.params);
 
         const services = req.services; 
 

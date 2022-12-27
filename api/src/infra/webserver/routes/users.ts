@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import UsersController from '../../../interfaces/controllers/UsersController';
 import UserDevicesController from '../../../interfaces/controllers/UserDevicesController';
+import UserMembersController from '../../../interfaces/controllers/UserMembersController';
 
 const router = Router();
 
@@ -20,5 +21,12 @@ router.route('/:userId/devices')
 
 router.route('/:userId/devices/:deviceId')
     .delete(UserDevicesController.delete);
+
+router.route('/:userId/members')
+    .get(UserMembersController.get)
+    .post(UserMembersController.create);
+
+router.route('/:userId/members/:memberId')
+    .delete(UserMembersController.delete);
 
 export default router;

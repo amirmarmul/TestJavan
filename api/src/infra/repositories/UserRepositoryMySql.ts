@@ -20,29 +20,35 @@ export default class extends UserRepository {
             return new User(
                 seqUser.uid,
                 seqUser.name,
+                seqUser.gender,
+                seqUser.parent,
             );
         })
     }
 
     async findOne(id: string) {
         const seqUser = await this.model.findOne({ where: { uid: id } });
-
+        
         return new User(
             seqUser.uid, 
             seqUser.name,
+            seqUser.gender,
+            seqUser.parent,
         );
     }
 
     async save(entity: User) {
-        const { id, name } = entity;
+        const { id, name, gender } = entity;
 
-        const seqUser = await this.model.create({ uid: id, name });
+        const seqUser = await this.model.create({ uid: id, name, gender });
         
         await seqUser.save();
 
         return new User(
             seqUser.uid, 
             seqUser.name,
+            seqUser.gender,
+            seqUser.parent,
         )
     }
 
@@ -51,13 +57,15 @@ export default class extends UserRepository {
 
         if (!seqUser) return false;
 
-        const { name } = entity;
+        const { name, gender } = entity;
 
-        await seqUser.update({ name });
+        await seqUser.update({ name, gender });
 
         return new User(
             seqUser.uid,
             seqUser.name,
+            seqUser.gender,
+            seqUser.parent,
         )
     }
 
@@ -69,5 +77,50 @@ export default class extends UserRepository {
         }
 
         return false;
+    }
+
+    async attachMember(user: User, member: User) {
+
+        const seqUser = await this.model.findOne({ where: { uid: member.id } });
+
+        if (!seqUser) return false;
+
+        await seqUser.update({ parent: user.id });
+
+        return new User(
+            seqUser.uid,
+            seqUser.name,
+            seqUser.gender,
+            seqUser.parent,
+        )
+    }
+
+    async revokeMember(user: User, member: User) {
+
+        const seqUser = await this.model.findOne({ where: { uid: member.id } });
+
+        if (!seqUser) return false;
+
+        await seqUser.update({ parent: null });
+
+        return new User(
+            seqUser.uid,
+            seqUser.name,
+            seqUser.gender,
+            seqUser.parent,
+        )
+    }
+
+    async findMembers(id: string) {
+        const seqUsers = await this.model.findAll({ where: { parent: id }});
+
+        return seqUsers.map((seqUser: any) => {
+            return new User(
+                seqUser.uid,
+                seqUser.name,
+                seqUser.gender,
+                seqUser.parent,
+            );
+        })
     }
 }

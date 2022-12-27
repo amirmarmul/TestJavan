@@ -1,6 +1,6 @@
 import UserDevice from '../../domain/UserDevice';
 
-export default async function AttactUserDevice(
+export default async function AttachUserDevice(
     userId: string,
     deviceId: string, 
     { userRepository, userDeviceRepository, deviceRepository }: any

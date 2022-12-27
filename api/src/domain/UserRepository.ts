@@ -7,4 +7,7 @@ export default abstract class UserRepository {
     abstract save(entity: User): any;
     abstract update(entity: User): any;
     abstract remove(id: string): any;
+    abstract attachMember(user: User, member: User): any;
+    abstract revokeMember(user: User, member: User): any;
+    abstract findMembers(id: string): any;
 }
