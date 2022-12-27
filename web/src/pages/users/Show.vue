@@ -13,7 +13,7 @@ useUser().findOne(id)
 useUserDevice().find(id)
 
 const { user } = storeToRefs(useUser())
-const { devices } = storeToRefs(useUserDevice())
+const { devices, totalPrice } = storeToRefs(useUserDevice())
 
 
 const confirmDeletion = (deviceId) => {
@@ -35,6 +35,10 @@ const confirmDeletion = (deviceId) => {
             <h2>My Devices</h2>
             
             <router-link :to="`/users/${user.id}/devices/create`">Add Device</router-link>
+            
+            <div>
+                <strong>Total Aset: <span v-text="totalPrice"></span></strong>
+            </div>
 
             <table>
                 <thead>

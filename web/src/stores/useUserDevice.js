@@ -15,7 +15,13 @@ export const useUserDevice = defineStore({
     getters: {
         totalPrice: (state) => {
             let sum = 0
-            return state.devices.forEach(x => sum += x)
+            if (Array.isArray(state.devices)) {
+                state.devices.forEach(x => {
+                    sum += x.price
+                })
+            };
+
+            return sum;
         }
     },
 
